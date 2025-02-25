@@ -1,5 +1,6 @@
 git pull origin main
 
+touch data.db
 cargo sqlx mig run
 
 docker build -t APP_NAME .
