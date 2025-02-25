@@ -1,6 +1,6 @@
 use sqlx::SqlitePool;
 
-pub mod handlers;
+pub mod handler;
 
 #[derive(Clone)]
 pub struct AppState {

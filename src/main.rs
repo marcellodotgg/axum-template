@@ -1,5 +1,5 @@
 use axum::{routing::get, Router};
-use axum_template::{handlers::ping, AppState};
+use axum_template::{handler::ping, AppState};
 use sqlx::{Pool, Sqlite, SqlitePool};
 use tokio::net::TcpListener;
 
@@ -26,5 +26,3 @@ async fn init_db() -> Pool<Sqlite> {
         .await
         .expect("Failed to connect to the database")
 }
-
-
