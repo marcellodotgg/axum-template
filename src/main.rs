@@ -1,5 +1,5 @@
 use axum::{routing::get, Router};
-use axum_template::{handler::ping, AppState};
+use axum_template::{AppState, routes::api};
 use sqlx::{Pool, Sqlite, SqlitePool};
 use tokio::net::TcpListener;
 
@@ -11,7 +11,7 @@ async fn main() {
         db: init_db().await,
     };
 
-    let ping_routes = Router::new().route("/ping", get(ping::ping));
+    let ping_routes = Router::new().route("/ping", get(api::ping::ping));
 
     let app = Router::new().merge(ping_routes).with_state(state);
 

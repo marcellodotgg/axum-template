@@ -1,6 +1,6 @@
-use sqlx::SqlitePool;
+pub mod routes;
 
-pub mod handler;
+use sqlx::SqlitePool;
 
 #[derive(Clone)]
 pub struct AppState {
