@@ -1,10 +1,10 @@
 use std::env;
 use axum::response::Redirect;
-use oauth2::{AuthUrl, AuthorizationCode, Client, ClientId, ClientSecret, CsrfToken, RedirectUrl, Scope, TokenResponse, TokenUrl};
+use oauth2::{AuthUrl, AuthorizationCode, ClientId, ClientSecret, CsrfToken, RedirectUrl, Scope, TokenResponse, TokenUrl};
 use oauth2::basic::BasicClient;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize)]
+#[derive(Deserialize, Serialize)]
 pub struct GoogleUser {
     pub email: String,
     pub picture: String,
@@ -12,6 +12,7 @@ pub struct GoogleUser {
     pub family_name: String,
 }
 
+#[derive(Clone)]
 pub struct GoogleOAuthClient {
     auth_url: AuthUrl,
     token_url: TokenUrl,
@@ -32,17 +33,17 @@ impl GoogleOAuthClient {
     }
 
     pub fn authenticate(self) -> Redirect {
-       let client = BasicClient::new(self.client_id)
-           .set_client_secret(self.client_secret)
-           .set_auth_uri(self.auth_url)
-           .set_token_uri(self.token_url)
-           .set_redirect_uri(self.redirect_url);
+        let client = BasicClient::new(self.client_id)
+            .set_client_secret(self.client_secret)
+            .set_auth_uri(self.auth_url)
+            .set_token_uri(self.token_url)
+            .set_redirect_uri(self.redirect_url);
 
-       let (auth_url, _) = client
-           .authorize_url(CsrfToken::new_random)
-           .add_scope(Scope::new("email".to_string()))
-           .add_scope(Scope::new("profile".to_string()))
-           .url();
+        let (auth_url, _) = client
+            .authorize_url(CsrfToken::new_random)
+            .add_scope(Scope::new("email".to_string()))
+            .add_scope(Scope::new("profile".to_string()))
+            .url();
 
         Redirect::to(auth_url.as_str())
     }

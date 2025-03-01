@@ -1,2 +1,2 @@
 pub mod ping;
-mod auth;
+pub mod auth;

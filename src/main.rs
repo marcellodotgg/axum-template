@@ -12,8 +12,11 @@ async fn main() {
     };
 
     let ping_routes = Router::new().route("/ping", get(api::ping::ping));
+    let auth_routes = Router::new()
+        .route("/auth/google", get(api::auth::google::oauth))
+        .route("/auth/google/callback", get(api::auth::google::oauth_callback));
 
-    let app = Router::new().merge(ping_routes).with_state(state);
+    let app = Router::new().merge(ping_routes).merge(auth_routes).with_state(state);
 
     let listener = TcpListener::bind("0.0.0.0:8080").await.unwrap();
 
