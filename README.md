@@ -12,5 +12,8 @@ GOOGLE_CLIENT_REDIRECT=http://localhost:8080/oauth/google/callback
 
 POST_LOGIN_REDIRECT_URL=http://localhost:8080
 POST_LOGIN_REDIRECT_ERROR_URL=http://localhost:8080/error
+
+JWT_SECRET=SUPER_DUPER_SECRET
+DOMAIN_NAME=""
 ```
 

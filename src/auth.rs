@@ -55,7 +55,7 @@ impl GoogleOAuthClient {
             .set_token_uri(self.token_url)
             .set_redirect_uri(self.redirect_url);
 
-        let async_http_client = reqwest::ClientBuilder::new().redirect(oauth2::reqwest::redirect::Policy::none()).build().expect("Client should build");
+        let async_http_client = reqwest::ClientBuilder::new().redirect(reqwest::redirect::Policy::none()).build().expect("Client should build");
 
         let token_result = client
             .exchange_code(AuthorizationCode::new(code.to_string()))
@@ -68,7 +68,7 @@ impl GoogleOAuthClient {
         }
     }
 
-    pub async fn get_user_from_token(self, token: &str) -> Result<GoogleUser, oauth2::reqwest::Error> {
+    pub async fn get_user_from_token(self, token: &str) -> Result<GoogleUser, reqwest::Error> {
         let response = reqwest::Client::new()
             .get("https://www.googleapis.com/oauth2/v2/userinfo")
             .bearer_auth(token)
