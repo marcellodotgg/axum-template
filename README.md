@@ -1,5 +1,5 @@
 # axum-template
-An axum template repository with sqlx, docker, and OAuth set up
+An axum template repository with sqlx, docker, and OAuth set up. Make sure to update the Dockerfile to change your APP_NAME and other properties to fit your needs.
 
 ## `.env`
 ```dotenv
