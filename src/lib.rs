@@ -1,6 +1,7 @@
 pub mod routes;
 pub mod auth;
 pub mod utils;
+mod user;
 
 use sqlx::SqlitePool;
 

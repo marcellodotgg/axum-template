@@ -10,6 +10,7 @@ pub struct GoogleUser {
     pub picture: String,
     pub given_name: String,
     pub family_name: String,
+    pub verified_email: bool,
 }
 
 #[derive(Clone)]
